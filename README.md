@@ -1,6 +1,6 @@
 # Real-Time Chat App (Version 1 / V1)
 
-A modern, responsive real-time chat application built with a React frontend and an Express/MongoDB backend, featuring live messaging, real-time online presence, and instant user updates over WebSockets.
+A modern, responsive real-time chat application built with a React frontend and an Express/MongoDB backend, featuring live messaging, real-time online presence, and instant user updates over WebSocket[...]
 
 ---
 
@@ -34,6 +34,12 @@ A modern, responsive real-time chat application built with a React frontend and 
 6. **Live User List Synchronization**: When a new user registers or signs in, other online clients automatically refresh their sidebar "Users" list in real-time without requiring a page refresh.
 7. **Typing Indicators**: Active "typing..." states displayed in the chat header when the other participant is typing in the message box.
 8. **Spacious, Overlap-Free Layout**: Clean message bubble designs with built-in width guards to prevent message text from overlapping with timestamps or status indicators.
+
+---
+
+## 📸 Demo & Screenshots
+
+*Screenshots showcasing the application interface and features coming soon...*
 
 ---
 
