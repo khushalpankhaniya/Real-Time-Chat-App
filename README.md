@@ -1,3 +1,4 @@
+## 📸 Demo & Screenshots
 
 <img width="1862" height="878" alt="Screenshot 2026-06-23 175622" src="https://github.com/user-attachments/assets/c1f2a927-c01f-4161-a9f1-cc112782cd73" />
 <img width="1873" height="889" alt="Screenshot 2026-06-23 175546" src="https://github.com/user-attachments/assets/1b4fdafb-03fd-4bd3-9bd3-b23c7d9c44d7" />
@@ -41,12 +42,6 @@ A modern, responsive real-time chat application built with a React frontend and 
 6. **Live User List Synchronization**: When a new user registers or signs in, other online clients automatically refresh their sidebar "Users" list in real-time without requiring a page refresh.
 7. **Typing Indicators**: Active "typing..." states displayed in the chat header when the other participant is typing in the message box.
 8. **Spacious, Overlap-Free Layout**: Clean message bubble designs with built-in width guards to prevent message text from overlapping with timestamps or status indicators.
-
----
-
-## 📸 Demo & Screenshots
-
-*Screenshots showcasing the application interface and features coming soon...*
 
 ---
 
