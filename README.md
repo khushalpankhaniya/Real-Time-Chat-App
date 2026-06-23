@@ -33,7 +33,7 @@ A modern, responsive real-time chat application built with a React frontend and 
 5. **Real-Time Presence Tracking**: Real-time online/offline indicators (green status dots) that update dynamically as users join or leave the app.
 6. **Live User List Synchronization**: When a new user registers or signs in, other online clients automatically refresh their sidebar "Users" list in real-time without requiring a page refresh.
 7. **Typing Indicators**: Active "typing..." states displayed in the chat header when the other participant is typing in the message box.
-8. **Spacious, Overlap-Free Layout**: Clean message bubble designs with built-in width guards to prevent message text from overlapping with timestamps or read receipts.
+8. **Spacious, Overlap-Free Layout**: Clean message bubble designs with built-in width guards to prevent message text from overlapping with timestamps or status indicators.
 
 ---
 
