@@ -18,36 +18,36 @@ const SOCKET_URL = import.meta.env.VITE_SOCKETIO_SERVER_URL || 'http://localhost
  * Returns an API object with helper methods.
  */
 export function useSocket({ userId, onMessage, onUserOnline, onUserOffline, onTyping }) {
-  const socketRef      = useRef(null);
+  const socketRef = useRef(null);
   const currentRoomRef = useRef(null);
 
   // Keep callbacks in refs so the socket handler never goes stale
-  const onMessageRef     = useRef(onMessage);
-  const onUserOnlineRef  = useRef(onUserOnline);
+  const onMessageRef = useRef(onMessage);
+  const onUserOnlineRef = useRef(onUserOnline);
   const onUserOfflineRef = useRef(onUserOffline);
-  const onTypingRef      = useRef(onTyping);
+  const onTypingRef = useRef(onTyping);
 
-  onMessageRef.current     = onMessage;
-  onUserOnlineRef.current  = onUserOnline;
+  onMessageRef.current = onMessage;
+  onUserOnlineRef.current = onUserOnline;
   onUserOfflineRef.current = onUserOffline;
-  onTypingRef.current      = onTyping;
+  onTypingRef.current = onTyping;
 
   useEffect(() => {
     const socket = io(SOCKET_URL, { transports: ['websocket', 'polling'] });
     socketRef.current = socket;
 
     socket.on('connect', () => {
-      console.log('🔌 Socket connected:', socket.id);
+      console.log('Socket connected:', socket.id);
       // Announce presence to server
       if (userId) socket.emit('join', { userId });
     });
 
-    socket.on('new_message',  (msg)  => onMessageRef.current?.(msg));
-    socket.on('user_online',  (data) => onUserOnlineRef.current?.(data));
+    socket.on('new_message', (msg) => onMessageRef.current?.(msg));
+    socket.on('user_online', (data) => onUserOnlineRef.current?.(data));
     socket.on('user_offline', (data) => onUserOfflineRef.current?.(data));
-    socket.on('typing',       (data) => onTypingRef.current?.(data));
-    socket.on('error',        (err)  => console.error('Socket error:', err.message));
-    socket.on('disconnect',   ()     => console.log('🔌 Socket disconnected'));
+    socket.on('typing', (data) => onTypingRef.current?.(data));
+    socket.on('error', (err) => console.error('Socket error:', err.message));
+    socket.on('disconnect', () => console.log('Socket disconnected'));
 
     return () => socket.disconnect();
   }, [userId]); // reconnect if userId changes (e.g. account switch)

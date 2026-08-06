@@ -1,23 +1,23 @@
-import express    from 'express';
-import http        from 'http';
-import { Server }  from 'socket.io';
-import morgan      from 'morgan';
-import cors        from 'cors';
-import dotenv      from 'dotenv';
+import express from 'express';
+import http from 'http';
+import { Server } from 'socket.io';
+import morgan from 'morgan';
+import cors from 'cors';
+import dotenv from 'dotenv';
 
-import { connectDB }          from './config/db.js';
-import userRoutes             from './routes/users.routes.js';
-import messageRoutes          from './routes/messages.routes.js';
-import conversationRoutes     from './routes/conversations.routes.js';
-import keysRoutes             from './routes/keys.routes.js';
-import { Message }            from './models/messages.js';
-import { User }               from './models/users.js';
+import { connectDB } from './config/db.js';
+import userRoutes from './routes/users.routes.js';
+import messageRoutes from './routes/messages.routes.js';
+import conversationRoutes from './routes/conversations.routes.js';
+import keysRoutes from './routes/keys.routes.js';
+import { Message } from './models/messages.js';
+import { User } from './models/users.js';
 
 dotenv.config();
 
-const app    = express();
+const app = express();
 const server = http.createServer(app);
-const io     = new Server(server, {
+const io = new Server(server, {
   cors: { origin: '*', methods: ['GET', 'POST'] },
 });
 
@@ -29,10 +29,10 @@ app.use(morgan('dev'));
 
 app.get('/', (_req, res) => res.json({ message: 'Real-time Chat Server is running' }));
 
-app.use('/api/users',         userRoutes);
-app.use('/api/messages',      messageRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/messages', messageRoutes);
 app.use('/api/conversations', conversationRoutes);
-app.use('/api/keys',          keysRoutes);
+app.use('/api/keys', keysRoutes);
 
 // ── Presence tracking ─────────────────────────────────────────────────────
 // userId → socketId
@@ -40,7 +40,7 @@ const onlineUsers = new Map();
 
 // ── Socket.io ─────────────────────────────────────────────────────────────
 io.on('connection', (socket) => {
-  console.log(`🔌 connected: ${socket.id}`);
+  console.log(`connected: ${socket.id}`);
 
   // ── Presence: join ────────────────────────────────────────────────────
   /**
@@ -56,7 +56,7 @@ io.on('connection', (socket) => {
 
     try {
       await User.findByIdAndUpdate(userId, {
-        status:     'online',
+        status: 'online',
         lastSeenAt: new Date(),
       });
     } catch (err) {
@@ -118,14 +118,14 @@ io.on('connection', (socket) => {
       const saved = await Message.create({ roomId, senderId, ciphertext, nonce });
 
       const outgoing = {
-        _id:        saved._id,
+        _id: saved._id,
         tempId,
         roomId,
         senderId,
         senderName,
         ciphertext,
         nonce,
-        sentAt:     saved.sentAt,
+        sentAt: saved.sentAt,
       };
 
       // Deliver to everyone in the room (including sender — confirms delivery)
@@ -144,7 +144,7 @@ io.on('connection', (socket) => {
 
   // ── Disconnect / presence cleanup ─────────────────────────────────────
   socket.on('disconnect', async () => {
-    console.log(`🔌 disconnected: ${socket.id}`);
+    console.log(` disconnected: ${socket.id}`);
 
     const userId = socket.userId;
     if (!userId) return;
@@ -167,4 +167,4 @@ io.on('connection', (socket) => {
 });
 
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
